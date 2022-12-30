@@ -1,0 +1,18 @@
+version: '3'
+services:
+  paperdock:
+    build:
+      context: .
+      args:
+        # Alpine 3 package name:
+        JAVA_PACKAGE: openjdk16-jre
+        PAPER_VERSION: 1.19.3
+        PAPER_BUILD: 365
+    environment:
+      # The suffix to -Xmx, e.g. 8192M, 8G
+      PAPER_MEMORY: 8G
+    ports:
+      # interface:host-port:25565
+      - 127.0.0.1:25565:25565
+    volumes:
+      - ./.data:/mount
