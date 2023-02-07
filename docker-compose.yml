@@ -5,14 +5,18 @@ services:
       context: .
       args:
         # Alpine 3 package name:
-        JAVA_PACKAGE: openjdk16-jre
+        JAVA_PACKAGE: openjdk17-jre
         PAPER_VERSION: 1.19.3
         PAPER_BUILD: 365
+        USER: 1001:1001
     environment:
       # The suffix to -Xmx, e.g. 8192M, 8G
       PAPER_MEMORY: 8G
     ports:
       # interface:host-port:25565
-      - 127.0.0.1:25565:25565
+      - 25565:25565
+    restart: always # Restart on failure and system reboot
+    stdin_open: true
+    tty: true
     volumes:
-      - ./.data:/mount
+      - ./.data:/mount:rw
